@@ -12,6 +12,7 @@ Local $aExplorerTitles[1]
 
 
 $var = WinList()
+$numWindowsClosed = 0
 For $i = 1 to $var[0][0]
 	; Only consider visble windows that have a title
 	$winTitle = $var[$i][0]
@@ -21,17 +22,21 @@ For $i = 1 to $var[0][0]
 
 		Local $iIndex = _ArraySearch($aExplorerTitles, $winTitle, 0, 0, 0, 1)
 		If @error Then
-			MsgBox(0, "Not Found", '"' & $winTitle & '" was not found in the array.')
+			; MsgBox(0, "Not Found", '"' & $winTitle & '" was not found in the array.')
 			; _ArrayDisplay($aExplorerTitles, "$aExplorerTitles BEFORE _ArrayInsert()")
 			_ArrayInsert($aExplorerTitles, 0, $winTitle)
 			; _ArrayDisplay($aExplorerTitles, "$aExplorerTitles BEFORE _ArrayInsert()")
 		Else
-			MsgBox(0, "Found", '"' & $winTitle & '" was found in the array at position ' & $iIndex & " - will try to close it if its Explorer.")
+			; MsgBox(0, "Found", '"' & $winTitle & '" was found in the array at position ' & $iIndex & " - will try to close it if its Explorer.")
 			WinClose("[Title:" & $winTitle & "; CLASS:CabinetWClass]")
+			$numWindowsClosed =$numWindowsClosed + 1
 		EndIf
 
 	EndIf
 Next
+
+MsgBox(0, "Explorer windows were closed", $numWindowsClosed & " duplicate Explorer windows were closed.")
+
 
 Func IsVisible($handle)
 	If BitAnd( WinGetState($handle), 2 ) Then 
