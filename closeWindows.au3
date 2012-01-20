@@ -9,6 +9,7 @@
 #include <Array.au3>
 
 Local $aExplorerTitles[1]
+Local $aCloseWinTitles[1]
 
 
 $var = WinList()
@@ -30,10 +31,14 @@ For $i = 1 to $var[0][0]
 			; MsgBox(0, "Found", '"' & $winTitle & '" was found in the array at position ' & $iIndex & " - will try to close it if its Explorer.")
 			WinClose("[Title:" & $winTitle & "; CLASS:CabinetWClass]")
 			$numWindowsClosed =$numWindowsClosed + 1
+			
+			_ArrayInsert($aCloseWinTitles, 0, $winTitle)
 		EndIf
 
 	EndIf
 Next
+
+; _ArrayDisplay($aCloseWinTitles, "$aCloseWinTitles")
 
 MsgBox(0, "Explorer windows were closed", $numWindowsClosed & " duplicate Explorer windows were closed.")
 
