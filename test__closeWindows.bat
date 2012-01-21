@@ -20,3 +20,4 @@ pause
 "%PATH_TO_AU3_DIR%\AutoIt3.exe" closeDuplicateWindows.au3
 
 pause
+
