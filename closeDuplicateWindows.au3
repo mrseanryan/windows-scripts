@@ -15,15 +15,36 @@ Local $aClosedAddresses[1]
 $aWinTitles = WinList()
 $numWindowsClosed = 0
 Local $aExpAddresses[1]
+$aExpAddresses[0] = 'dummy entry'
+
 For $i = 1 to $aWinTitles[0][0]
 	; Only consider visble windows that have a title
 	$winTitle = $aWinTitles[$i][0]
 	$winHandle = $aWinTitles[$i][1]
 	If $winTitle <> "" AND IsVisible($aWinTitles[$i][1]) Then
 		
-		$expAddress = ControlGetText($winHandle,'','Edit1')
+		$bHasAddress = False
+
+		If @OSVersion = "WIN_7" Then
+			$expAddress = WinGetText($winHandle,"")
+			If StringInStr($expAddress, "Address:") <> 0 Then
+				;;MsgBox(0, "Win7 explorer Address 1", $expAddress)
+				$expAddress = StringReplace($expAddress, "Address: ", "")
+				;;MsgBox(0, "Win7 explorer Address 2", $expAddress)
+				$aLines = StringSplit($expAddress, @CRLF)
+				If $aLines[0] > 0 Then
+					$expAddress = $aLines[1]
+					;MsgBox(0, "Win7 explorer Address 3", $expAddress)
+					$bHasAddress = (StringLen($expAddress) > 0)
+				EndIf
+			EndIf
+		Else
+			;XP or other
+			$expAddress = ControlGetText($winHandle,'','Edit1') ; ok on XP
+			;;MsgBox(0, "explorer Address", $expAddress)
+			$bHasAddress = (StringLen($expAddress) > 0)
+		EndIf
 		
-		$bHasAddress = (StringLen($expAddress) > 0)
 		If $bHasAddress Then
 			
 			$bDupAddress = False
@@ -33,13 +54,13 @@ For $i = 1 to $aWinTitles[0][0]
 				;MsgBox(0, "adding address", ' ' & $expAddress)
 				_ArrayInsert($aExpAddresses, 0, $expAddress)
 			Else
-				;MsgBox(0, "dup address", ' ' & $expAddress)
+				;MsgBox(0, "dup address", 'index = ' & $addressIndex & ' for ' & $expAddress)
 				$bDupAddress = True
 			EndIf
 
 			If $bDupAddress Then
 
-				;MsgBox(0, "closing window titled ", ' ' & $winTitle)
+				;;;MsgBox(0, "closing window titled ", ' ' & $winTitle)
 
 				WinClose($winHandle)
 				$numWindowsClosed =$numWindowsClosed + 1
