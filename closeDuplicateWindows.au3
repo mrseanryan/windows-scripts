@@ -4,7 +4,10 @@
 ;
 ;dependencies: AutoIt3
 ;
-; tested on Windows 7 Home + XP Home
+; tested on :
+; Windows 7 Home 
+; Windows 7 Pro 
+; XP Home
 
 #include <Array.au3>
 
