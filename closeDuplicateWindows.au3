@@ -1,6 +1,6 @@
 ; script to find all explorer windows with duplicate address (not title !), and close them
 ;
-; this script just looks at the title of the Window, which might NOT be the full address
+; this script just looks at the title of the Window, and tries to extract the full address
 ;
 ;dependencies: AutoIt3
 ;
