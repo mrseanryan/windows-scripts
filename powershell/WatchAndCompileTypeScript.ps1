@@ -2,10 +2,9 @@
 #
 #when a file changes, then re-compile it.
 
-
 $watcher = New-Object System.IO.FileSystemWatcher
-#$watcher.Path = "V:\temp"
-$watcher.Path = "V:\tfs12.II_SPOC\Wells\SPOC\SPOC Development\Source\Spoc.HMI\Spoc.HMI.Web\Scripts\TS"
+$watcher.Path = "V:\src\MyProject"
+
 $watcher.IncludeSubdirectories = $true
 $watcher.EnableRaisingEvents = $true
 
@@ -23,4 +22,5 @@ $changed = Register-ObjectEvent $watcher "Changed" -Action {
 
 write-host 'changed.Id:' $changed.Id
 
-# Unregister-Event $changed.Id
+#to stop the watcher, then close the PowerShell window, OR run this command:
+# Unregister-Event < change Id >
