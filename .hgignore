@@ -1,0 +1,8 @@
+syntax: glob
+*.suo
+*.orig
+
+#VS temp dirs:
+obj
+Debug
+Release
