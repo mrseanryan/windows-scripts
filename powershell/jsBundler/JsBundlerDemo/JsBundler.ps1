@@ -13,7 +13,7 @@
 
 # Usage: 
 # ------
-# JsBundler.ps1 <bundle file> [OPTIONS]
+# JsBundler.ps1 <bundle file> <path to basedir for the JavaScript files> [OPTIONS]
 
 # ARGUMENTS =================================================================
 $pathToBundleFile = $args[0]
@@ -44,7 +44,7 @@ if (!$IsGoodArgs)
 {
     Write-Host ("Incorrect arguments.") -foregroundcolor red
     Write-Host ("USAGE:")
-    Write-Host ("JsBundler <bundle file> [OPTIONS]")
+    Write-Host ("JsBundler <bundle file> <path to basedir for the JavaScript files> [OPTIONS]")
     Write-Host ("OPTIONS:")
     Write-Host ("-m    use the Minimised JavaScript files")
     Write-Output "" 
