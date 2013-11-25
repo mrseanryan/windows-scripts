@@ -25,37 +25,42 @@ $IsMinimising = $False
 $IsGoodArgs = $False
 if (($args.Count -eq 2 -or $args.Count -eq 3) -and $pathToBundleFile -ne '' -and $pathToBaseDir -ne '')
 {
-    $IsGoodArgs = $True
+	$IsGoodArgs = $True
 }
 
 if ($optionOne)
 {
-    if ($optionOne -eq '-m')
-    {
-	    $IsMinimising = $True
-    }
-    else
-    {
-        $IsGoodArgs = $False
-    }
+	if ($optionOne -eq '-m')
+	{
+		$IsMinimising = $True
+	}
+	else
+	{
+		$IsGoodArgs = $False
+	}
 }
 
 if (!$IsGoodArgs)
 {
-    Write-Host ("Incorrect arguments.") -foregroundcolor red
-    Write-Host ("USAGE:")
-    Write-Host ("JsBundler <bundle file> <path to basedir for the JavaScript files> [OPTIONS]")
-    Write-Host ("OPTIONS:")
-    Write-Host ("-m    use the Minimised JavaScript files")
-    Write-Output "" 
+	Write-Host ("Incorrect arguments.") -foregroundcolor red
+	Write-Host ("USAGE:")
+	Write-Host ("JsBundler <bundle file> <path to basedir for the JavaScript files> [OPTIONS]")
+	Write-Host ("OPTIONS:")
+	Write-Host ("-m    use the Minimised JavaScript files")
+	Write-Output "" 
 	exit
 }
 
-$outputPath = $pathToBundleFile.ToString().Replace('.bundle', '')
+$outputPath = $pathToBundleFile.ToString().ToLower().Replace('.bundle', '')
+
+if(!$outputPath.Contains(".js"))
+{
+	throw "Only implemented for use with JavaScript bundles";
+}
 
 if($IsMinimising)
 {
-    $outputPath = $outputPath.Replace('.js', '.min.js')
+	$outputPath = $outputPath.Replace('.js', '.min.js')
 }
 
 # CONFIG SUMMARY ============================================================
@@ -64,11 +69,11 @@ Write-Host $pathToBundleFile " -> " $outputPath
 
 if($IsMinimising)
 {
-    Write-Host "Using minimised JavaScript files"
+	Write-Host "Using minimised JavaScript files"
 }
 else
 {
-    Write-Host "NOT using minimised JavaScript files"
+	Write-Host "NOT using minimised JavaScript files"
 }
 
 # READ XML ==================================================================
@@ -85,23 +90,23 @@ $stream.WriteLine('/*bundled by JsBundler.*/')
 
 ForEach ($srcPath in $srcPaths)
 { 
-    if($IsMinimising)
-    {
-        $srcPath = $srcPath.Replace('.js', '.min.js')
-    }
+	if($IsMinimising)
+	{
+		$srcPath = $srcPath.Replace('.js', '.min.js')
+	}
 
-    Write-Host $srcPath
-    $text = Get-Content $srcPath
+	Write-Host $srcPath
+	$text = Get-Content $srcPath
 
-    $stream.WriteLine('/*' + $srcPath + '*/')
+	$stream.WriteLine('/*' + $srcPath + '*/')
 
-    foreach ($line in $text)
-    {
-        $stream.WriteLine($line)    
-    }
+	foreach ($line in $text)
+	{
+		$stream.WriteLine($line)    
+	}
 
-    #add a ; to prevent syntax error in one file, propogating to the next:
-    $stream.WriteLine(';')
+	#add a ; to prevent syntax error in one file, propogating to the next:
+	$stream.WriteLine(';')
 }
 
 $stream.Flush();

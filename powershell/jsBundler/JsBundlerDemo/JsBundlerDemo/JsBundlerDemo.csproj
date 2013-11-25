@@ -82,6 +82,14 @@
     <Content Include="Scripts\Utilities.min.js">
       <DependentUpon>Utilities.js</DependentUpon>
     </Content>
+    <Content Include="Styles\Style1.css" />
+    <Content Include="Styles\Style2.css" />
+    <Content Include="Styles\Styles.css">
+      <DependentUpon>Styles.css.bundle</DependentUpon>
+    </Content>
+    <Content Include="Styles\Styles.min.css">
+      <DependentUpon>Styles.css.bundle</DependentUpon>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />
     <Content Include="Scripts\Utilities.min.js.map">
@@ -100,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\FibonaciBundle.js.bundle" />
+    <None Include="Styles\Styles.css.bundle" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
