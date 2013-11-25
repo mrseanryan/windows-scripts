@@ -15,6 +15,17 @@
 # ------
 # JsBundler.ps1 <bundle file> <path to basedir for the JavaScript files> [OPTIONS]
 
+# ENSURE CORRECT EXIT CODE =================================================================
+#
+# PS has issue, where if a script is run with -file, then the exit code is ALWAYS 0.
+#so we put in a trap to catch this:
+
+trap
+{
+	write-output $_
+	exit 1
+}
+
 # ARGUMENTS =================================================================
 $pathToBundleFile = $args[0]
 $pathToBaseDir = $args[1]
