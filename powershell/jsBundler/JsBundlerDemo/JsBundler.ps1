@@ -97,7 +97,8 @@ $nodes | ForEach-Object { $srcPaths.Add($pathToBaseDir + $_.Node.'#text'); }
 Write-Host 'Processing files...'
 #stream is the fastest way to write a file:
 $stream = [System.IO.StreamWriter] $outputPath
-$stream.WriteLine('/*bundled by JsBundler.*/')
+$nowString = Get-Date
+$stream.WriteLine('/*bundled by JsBundler at ' + $nowString + ' */')
 
 ForEach ($srcPath in $srcPaths)
 { 
