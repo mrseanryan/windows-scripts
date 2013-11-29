@@ -98,7 +98,8 @@ Write-Host 'Processing files...'
 #stream is the fastest way to write a file:
 $stream = [System.IO.StreamWriter] $outputPath
 $nowString = Get-Date
-$stream.WriteLine('/*bundled by JsBundler at ' + $nowString + ' */')
+$hostname = $env:computername
+$stream.WriteLine('/*bundled by JsBundler at ' + $nowString + ' on ' + $hostname + ' */')
 
 ForEach ($srcPath in $srcPaths)
 { 
