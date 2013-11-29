@@ -1,4 +1,4 @@
-/*bundled by JsBundler.*/
+/*bundled by JsBundler at 11/29/2013 11:59:13 */
 /*JsBundlerDemo/Scripts/Utilities.js*/
 
 var Utilities = Utilities || {};
