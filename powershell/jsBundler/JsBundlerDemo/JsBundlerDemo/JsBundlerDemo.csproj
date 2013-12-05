@@ -83,7 +83,13 @@
       <DependentUpon>Utilities.js</DependentUpon>
     </Content>
     <Content Include="Styles\Style1.css" />
+    <Content Include="Styles\Style1.min.css">
+      <DependentUpon>Style1.css</DependentUpon>
+    </Content>
     <Content Include="Styles\Style2.css" />
+    <Content Include="Styles\Style2.min.css">
+      <DependentUpon>Style2.css</DependentUpon>
+    </Content>
     <Content Include="Styles\Styles.css">
       <DependentUpon>Styles.css.bundle</DependentUpon>
     </Content>
