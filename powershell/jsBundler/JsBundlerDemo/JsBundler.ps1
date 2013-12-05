@@ -26,12 +26,20 @@ trap
 	exit 1
 }
 
+#xxx for debugging
+# $args = @("V:\sean\sourcecode\bitbucket\windowsscripts\powershell\jsBundler\JsBundlerDemo\JsBundlerDemo\Scripts\FibonaciBundle.js.bundle",
+# "V:\sean\sourcecode\bitbucket\windowsscripts\powershell\jsBundler\JsBundlerDemo\JsBundlerDemo",
+# "-b"
+# )
+#xxx
+
 # ARGUMENTS =================================================================
 $pathToBundleFile = $args[0]
 $pathToBaseDir = $args[1]
 $optionOne = $args[2]
 
 $IsMinimising = $False
+$IsBothMinimisingAndNot = $False
 
 $IsGoodArgs = $False
 if (($args.Count -eq 2 -or $args.Count -eq 3) -and $pathToBundleFile -ne '' -and $pathToBaseDir -ne '')
@@ -47,7 +55,14 @@ if ($optionOne)
 	}
 	else
 	{
-		$IsGoodArgs = $False
+        if($optionOne -eq '-b')
+        {
+            $IsBothMinimisingAndNot = $True
+        }
+        else
+        {
+		    $IsGoodArgs = $False
+        }
 	}
 }
 
@@ -57,7 +72,7 @@ if (!$IsGoodArgs)
 	Write-Host ("USAGE:")
 	Write-Host ("JsBundler <bundle file> <path to basedir for the input files> [OPTIONS]")
 	Write-Host ("OPTIONS:")
-	#Write-Host ("-b    read in and bundle Both minimised and unminimised files")
+	Write-Host ("-b    read in and bundle Both minimised and unminimised files")
 	Write-Host ("-m    read in and bundle Minimised files")
 	Write-Output ""
 	exit
@@ -86,65 +101,92 @@ else
 	}
 }
 
-if($IsMinimising)
+# FUNCTION ============================================================
+function GenerateBundleFile($outputPath, $ext, $IsMinimising)
 {
-	$outputPath = $outputPath.Replace($ext, '.min' + $ext)
+	if($IsMinimising)
+	{
+		$outputPath = $outputPath.Replace($ext, '.min' + $ext)
+	}
+
+	# CONFIG SUMMARY ============================================================
+	Write-Host "Bundling JavaScript from bundle file:"
+	Write-Host $pathToBundleFile " -> " $outputPath
+
+	if($IsMinimising)
+	{
+		Write-Host "Using minimised files"
+	}
+	else
+	{
+		Write-Host "NOT using minimised files"
+	}
+
+	# READ XML ==================================================================
+	$srcPaths = New-Object Collections.Generic.List[String]
+
+	[xml]$xml = Get-Content $pathToBundleFile;
+	$nodes = Select-Xml "//bundle/file" $xml
+	$nodes | ForEach-Object { $srcPaths.Add($pathToBaseDir + $_.Node.'#text'); }
+
+	Write-Host 'Processing files...'
+    
+    #make sure our output file is NOT readonly:
+    if (Test-Path($outputPath))
+    {
+        sp $outputPath IsReadOnly $false
+    }
+
+	#stream is the fastest way to write a file:
+    #$fs = New-Object IO.FileStream $outputPath,'Write','Create'
+    $stream = New-Object System.IO.StreamWriter($outputPath)
+	$nowString = Get-Date
+	$hostname = $env:computername
+	$stream.WriteLine('/*bundled by JsBundler at ' + $nowString + ' on ' + $hostname + ' */')
+
+	ForEach ($srcPath in $srcPaths)
+	{ 
+		if($IsMinimising)
+		{
+			$srcPath = $srcPath.Replace($ext, '.min' + $ext)
+		}
+
+		Write-Host $srcPath
+		$text = Get-Content $srcPath
+
+		$stream.WriteLine('/*' + $srcPath + '*/')
+
+		foreach ($line in $text)
+		{
+			$stream.WriteLine($line)    
+		}
+
+		if($isJavaScript)
+		{
+			#add a ; to prevent syntax error in one file, propogating to the next:
+			$stream.WriteLine(';')
+		}
+	}
+
+	$stream.Flush();
+	$stream.Close();
+	$stream.Dispose();
+    #$fs.Close();
+    #$fs.Dispose();
+
+	Write-Host 'Output has been written to file:'
+	Write-Host $outputPath
 }
 
-# CONFIG SUMMARY ============================================================
-Write-Host "Bundling JavaScript from bundle file:"
-Write-Host $pathToBundleFile " -> " $outputPath
-
-if($IsMinimising)
+# MAIN ============================================================
+if($IsBothMinimisingAndNot)
 {
-	Write-Host "Using minimised files"
+    GenerateBundleFile $outputPath $ext $False
+    GenerateBundleFile $outputPath $ext $True
 }
 else
 {
-	Write-Host "NOT using minimised files"
+    GenerateBundleFile $outputPath $ext $IsMinimising
 }
 
-# READ XML ==================================================================
-$srcPaths = New-Object Collections.Generic.List[String]
-
-[xml]$xml = Get-Content $pathToBundleFile;
-$nodes = Select-Xml "//bundle/file" $xml
-$nodes | ForEach-Object { $srcPaths.Add($pathToBaseDir + $_.Node.'#text'); }
-
-Write-Host 'Processing files...'
-#stream is the fastest way to write a file:
-$stream = [System.IO.StreamWriter] $outputPath
-$nowString = Get-Date
-$hostname = $env:computername
-$stream.WriteLine('/*bundled by JsBundler at ' + $nowString + ' on ' + $hostname + ' */')
-
-ForEach ($srcPath in $srcPaths)
-{ 
-	if($IsMinimising)
-	{
-		$srcPath = $srcPath.Replace($ext, '.min' + $ext)
-	}
-
-	Write-Host $srcPath
-	$text = Get-Content $srcPath
-
-	$stream.WriteLine('/*' + $srcPath + '*/')
-
-	foreach ($line in $text)
-	{
-		$stream.WriteLine($line)    
-	}
-
-	if($isJavaScript)
-	{
-		#add a ; to prevent syntax error in one file, propogating to the next:
-		$stream.WriteLine(';')
-	}
-}
-
-$stream.Flush();
-$stream.Close();
-$stream = $null
-
-Write-Host 'Output has been written to file:'
-Write-Host $outputPath
+Write-Host "[done]"
