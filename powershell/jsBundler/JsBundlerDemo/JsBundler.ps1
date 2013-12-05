@@ -3,9 +3,9 @@
 #
 # Summary:
 # --------
-# Read a Web Essentials bundle file, and bundle up the given JavaScript files.
+# Read a Web Essentials bundle file, and bundle up the given JavaScript or CSS files.
 # Purpose: to run as part of a build, and make sure that all bundle output is up to date.
-# This means developers in a team can simply check in the JavaScript files, they do not have to worry about merging bundle output files.
+# This means developers in a team can simply check in the JavaScript or CSS files - they do not have to worry about merging bundle output files.
 
 # Dependencies: 
 # -------------
@@ -13,7 +13,7 @@
 
 # Usage: 
 # ------
-# JsBundler.ps1 <bundle file> <path to basedir for the JavaScript files> [OPTIONS]
+# JsBundler.ps1 <bundle file> <path to basedir for the input files> [OPTIONS]
 
 # ENSURE CORRECT EXIT CODE =================================================================
 #
@@ -55,23 +55,40 @@ if (!$IsGoodArgs)
 {
 	Write-Host ("Incorrect arguments.") -foregroundcolor red
 	Write-Host ("USAGE:")
-	Write-Host ("JsBundler <bundle file> <path to basedir for the JavaScript files> [OPTIONS]")
+	Write-Host ("JsBundler <bundle file> <path to basedir for the input files> [OPTIONS]")
 	Write-Host ("OPTIONS:")
-	Write-Host ("-m    use the Minimised JavaScript files")
-	Write-Output "" 
+	#Write-Host ("-b    read in and bundle Both minimised and unminimised files")
+	Write-Host ("-m    read in and bundle Minimised files")
+	Write-Output ""
 	exit
 }
 
 $outputPath = $pathToBundleFile.ToString().ToLower().Replace('.bundle', '')
 
-if(!$outputPath.Contains(".js"))
+$isJavaScript = $False
+$isCss = $False
+$ext = ''
+if($outputPath.Contains(".js"))
 {
-	throw "Only implemented for use with JavaScript bundles";
+	$isJavaScript = $True
+	$ext = ".js"
+} 
+else 
+{
+	if($outputPath.Contains(".css"))
+	{
+		$isCss = $True
+		$ext = ".css"
+	}
+	else
+	{
+		throw "Only implemented for use with JavaScript or CSS bundles";
+	}
 }
 
 if($IsMinimising)
 {
-	$outputPath = $outputPath.Replace('.js', '.min.js')
+	$outputPath = $outputPath.Replace($ext, '.min' + $ext)
 }
 
 # CONFIG SUMMARY ============================================================
@@ -80,11 +97,11 @@ Write-Host $pathToBundleFile " -> " $outputPath
 
 if($IsMinimising)
 {
-	Write-Host "Using minimised JavaScript files"
+	Write-Host "Using minimised files"
 }
 else
 {
-	Write-Host "NOT using minimised JavaScript files"
+	Write-Host "NOT using minimised files"
 }
 
 # READ XML ==================================================================
@@ -105,7 +122,7 @@ ForEach ($srcPath in $srcPaths)
 { 
 	if($IsMinimising)
 	{
-		$srcPath = $srcPath.Replace('.js', '.min.js')
+		$srcPath = $srcPath.Replace($ext, '.min' + $ext)
 	}
 
 	Write-Host $srcPath
@@ -118,8 +135,11 @@ ForEach ($srcPath in $srcPaths)
 		$stream.WriteLine($line)    
 	}
 
-	#add a ; to prevent syntax error in one file, propogating to the next:
-	$stream.WriteLine(';')
+	if($isJavaScript)
+	{
+		#add a ; to prevent syntax error in one file, propogating to the next:
+		$stream.WriteLine(';')
+	}
 }
 
 $stream.Flush();
