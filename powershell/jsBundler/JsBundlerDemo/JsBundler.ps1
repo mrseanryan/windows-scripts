@@ -69,6 +69,8 @@ if ($optionOne)
 if (!$IsGoodArgs)
 {
 	Write-Host ("Incorrect arguments.") -foregroundcolor red
+    Write-Host ("PURPOSE:")
+    Write-Host ("Read a Web Essentials bundle file, and bundle up the given JavaScript or CSS files.")
 	Write-Host ("USAGE:")
 	Write-Host ("JsBundler <bundle file> <path to basedir for the input files> [OPTIONS]")
 	Write-Host ("OPTIONS:")
