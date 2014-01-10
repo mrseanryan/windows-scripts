@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bundle minify="true" output="CssBundleAndMinimise.bundled.css">
+  <!-- format is same as Web Essential bundle -->
+  <!--The order of the <file> elements determines the order of them when bundled.-->
+  <file>/css/border-none.css</file>
+  <file>/css/box-model-hack.css</file>
+  <file>/css/bug9527.css</file>
+  <file>/css/color.css</file>
+  <file>/css/SampleStylesheet1.css</file>
+</bundle>

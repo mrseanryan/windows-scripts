@@ -1,2 +1,69 @@
-﻿body {
+﻿/* --------------------------------------------
+    Home Styles
+----------------------------------------------- */
+
+#home-header,
+.home-info 
+{
+    zoom: 1;
+}
+
+#home-header:after,
+.home-info:after
+{
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+/* Header
+----------------------------------------------- */
+
+#home-header
+{
+    padding: 15px 30px;
+    background: #fff;
+}
+
+#home-header .userinfo dt a,
+#home-header .userinfo .user
+{
+    margin-left: 8px;
+    margin-right: 15px;
+    color: #000;
+}
+
+#home-header .userinfo strong
+{
+    float: left;
+    margin-right: 5px;
+    border-right: 1px solid #D7D7D7;
+}
+
+#home-header .userinfo li
+{
+    padding-top: 5px;
+}
+
+#home-header .userinfo dd
+{
+    padding-left: 10px;
+}
+
+#home-header .userinfo ul
+{
+    float: left;
+}
+
+#home-header .userinfo dt,
+#home-header .userinfo dd
+{
+    display: inline;
+}
+
+#home-header .partner
+{
+    float: left;
 }

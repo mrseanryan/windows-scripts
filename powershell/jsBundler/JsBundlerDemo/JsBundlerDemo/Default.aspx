@@ -7,6 +7,9 @@
     <title>JsBundler Demo</title>
     <script src="Scripts/jquery-2.0.3.min.js"></script>
     <script src="Scripts/FibonaciBundle.js"></script>
+    <script src="Styles/FileNotInBundle.min.js"></script>
+
+    <link href="Styles/Styles.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
