@@ -60,47 +60,39 @@
     <Content Include="Default.aspx" />
     <Content Include="packages.config" />
     <Content Include="Scripts\Fibonaci.js" />
-    <Content Include="Scripts\Fibonaci.min.js">
-      <DependentUpon>Fibonaci.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\FibonaciBundle.min.js.map">
-      <DependentUpon>FibonaciBundle.js.bundle</DependentUpon>
-    </Content>
-    <Content Include="Scripts\Fibonaci.min.js.map">
-      <DependentUpon>Fibonaci.js</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
-    <Content Include="Scripts\FibonaciBundle.js">
-      <DependentUpon>FibonaciBundle.js.bundle</DependentUpon>
-    </Content>
-    <Content Include="Scripts\FibonaciBundle.min.js">
-      <DependentUpon>FibonaciBundle.js.bundle</DependentUpon>
-    </Content>
+    <Content Include="Scripts\FibonaciBundle.js" />
+    <Content Include="Scripts\FibonaciBundle.min.js" />
+    <Content Include="Scripts\FileNotInBundle.js" />
+    <Content Include="Scripts\FileNotInBundle.min.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
+    <Content Include="Scripts\SampleJavaScript1.min.js" />
     <Content Include="Scripts\Utilities.js" />
-    <Content Include="Scripts\Utilities.min.js">
-      <DependentUpon>Utilities.js</DependentUpon>
+    <Content Include="Styles\Fibonaci.js" />
+    <Content Include="Styles\FibonaciBundle.js" />
+    <Content Include="Styles\FibonaciBundle.min.js" />
+    <Content Include="Styles\FileNotInBundle.css" />
+    <Content Include="Styles\FileNotInBundle.js" />
+    <Content Include="Styles\FileNotInBundle.min.js" />
+    <Content Include="Styles\FileNotInBundle.min.js.map">
+      <DependentUpon>FileNotInBundle.js</DependentUpon>
     </Content>
+    <None Include="Styles\jquery-2.0.3.intellisense.js" />
+    <Content Include="Styles\jquery-2.0.3.js" />
+    <Content Include="Styles\jquery-2.0.3.min.js" />
+    <Content Include="Styles\SampleJavaScript1.min.js" />
     <Content Include="Styles\Style1.css" />
-    <Content Include="Styles\Style1.min.css">
-      <DependentUpon>Style1.css</DependentUpon>
-    </Content>
     <Content Include="Styles\Style2.css" />
-    <Content Include="Styles\Style2.min.css">
-      <DependentUpon>Style2.css</DependentUpon>
-    </Content>
     <Content Include="Styles\Styles.css">
-      <DependentUpon>Styles.css.bundle</DependentUpon>
+      <DependentUpon>Styles.css.custombundle</DependentUpon>
     </Content>
     <Content Include="Styles\Styles.min.css">
-      <DependentUpon>Styles.css.bundle</DependentUpon>
+      <DependentUpon>Styles.css.custombundle</DependentUpon>
     </Content>
+    <Content Include="Styles\Utilities.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />
-    <Content Include="Scripts\Utilities.min.js.map">
-      <DependentUpon>Utilities.js</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.aspx.cs">
@@ -113,8 +105,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\FibonaciBundle.js.bundle" />
-    <None Include="Styles\Styles.css.bundle" />
+    <None Include="Scripts\FibonaciBundle.js.custombundle" />
+    <Content Include="Styles\FibonaciBundle.js.custombundle" />
+    <Content Include="Styles\jquery-2.0.3.min.map" />
+    <None Include="Styles\Styles.css.custombundle" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -147,6 +141,27 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PreBuildEvent>SET LOCAL
+SET PROG_PATH=$(ProjectDir)..\CustomBundler\bin\$(ConfigurationName)\CustomBundler.exe
+
+ECHO Bundling a JavaScript bundle ...
+ECHO "%25PROG_PATH%25" "$(ProjectDir)Scripts\FibonaciBundle.js.custombundle" "$(ProjectDir)."
+"%25PROG_PATH%25" "$(ProjectDir)Scripts\FibonaciBundle.js.custombundle" "$(ProjectDir)."
+
+ECHO Minimising a single JavaScript file ...
+ECHO "%25PROG_PATH%25" "$(ProjectDir)Scripts\FileNotInBundle.js"
+"%25PROG_PATH%25" "$(ProjectDir)Scripts\FileNotInBundle.js"
+
+ECHO Bundling a CSS bundle ...
+ECHO "%25PROG_PATH%25" "$(ProjectDir)Styles\Styles.css.custombundle" "$(ProjectDir)."
+"%25PROG_PATH%25" "$(ProjectDir)Styles\Styles.css.custombundle" "$(ProjectDir)."
+
+ECHO Minimising a single CSS file ...
+ECHO "%25PROG_PATH%25" "$(ProjectDir)Styles\FileNotInBundle.css"
+"%25PROG_PATH%25" "$(ProjectDir)Styles\FileNotInBundle.css"
+</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

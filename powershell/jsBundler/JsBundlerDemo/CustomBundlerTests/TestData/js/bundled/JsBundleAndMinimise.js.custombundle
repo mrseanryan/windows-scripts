@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bundle minify="true" output="JsBundleAndMinimise.bundled.js">
+  <!-- format is same as Web Essential bundle -->
+  <!--The order of the <file> elements determines the order of them when bundled.-->
+  <file>/js/SampleJavaScript1.js</file>
+  <file>/js/SampleJavaScript2.js</file>
+  <file>/js/SampleJavaScript4.js</file>
+  <file>/js/SampleJavaScript5.js</file>
+</bundle>

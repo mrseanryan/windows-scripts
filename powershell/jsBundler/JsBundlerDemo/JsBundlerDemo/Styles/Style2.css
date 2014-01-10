@@ -1,2 +1,82 @@
-﻿body {
+﻿
+/* Search
+----------------------------------------------- */
+
+#home-search
+{
+    position: relative;
+    height: 310px;
+    background: #c00 url("/image/home_bg.png") 0 100% repeat-x;
+    z-index: 1000;
+}
+
+#home-search h1,
+#home-search h2
+{
+    padding: 30px;
+    color: #fff;
+    text-align: center;
+}
+
+#home-search h1 img
+{
+    width: 409px;
+    height: 93px;
+}
+
+#home-search h2
+{
+    padding-top: 98px;
+}
+
+/* Search Box
+----------------------------------------------- */
+
+#home-search .search
+{
+    position: absolute;
+    top: 150px;
+    left: 215px;
+    width: 551px;
+}
+
+#home-search .searchtext
+{
+    padding: 6px 0 0 9px;
+    width: 386px;
+    height: 25px;
+    font-size: 130%;
+}
+
+#home-search .searchbutton
+{
+    padding-top: 33px;
+    width: 130px;
+    background-image: url("/image/search_button_home.png");
+}
+
+#home-search .searchsample, 
+#home-search .searchregion
+{
+    font-size: 90%;
+}
+
+#home-search .searchsample
+{
+	top: 44px;
+}
+
+#home-search .search .sc-h
+{
+    background-image: url("/image/search_header_home.png");
+}
+
+#home-search .search .sc-b
+{
+    background-image: url("/image/search_body_home.png");
+}
+
+#home-search .search .sc-f
+{
+    background-image: url("/image/search_footer_home.png");
 }
