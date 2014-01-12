@@ -144,22 +144,23 @@
   <PropertyGroup>
     <PreBuildEvent>SET LOCAL
 SET PROG_PATH=$(ProjectDir)..\CustomBundler\bin\$(ConfigurationName)\CustomBundler.exe
+SET OPTIONS=-v
 
 ECHO Bundling a JavaScript bundle ...
-ECHO "%25PROG_PATH%25" "$(ProjectDir)Scripts\FibonaciBundle.js.custombundle" "$(ProjectDir)."
-"%25PROG_PATH%25" "$(ProjectDir)Scripts\FibonaciBundle.js.custombundle" "$(ProjectDir)."
+ECHO "%25PROG_PATH%25" "$(ProjectDir)Scripts\FibonaciBundle.js.custombundle" "$(ProjectDir)." %25OPTIONS%25
+"%25PROG_PATH%25" "$(ProjectDir)Scripts\FibonaciBundle.js.custombundle" "$(ProjectDir)." %25OPTIONS%25
 
 ECHO Minimising a single JavaScript file ...
-ECHO "%25PROG_PATH%25" "$(ProjectDir)Scripts\FileNotInBundle.js"
-"%25PROG_PATH%25" "$(ProjectDir)Scripts\FileNotInBundle.js"
+ECHO "%25PROG_PATH%25" "$(ProjectDir)Scripts\FileNotInBundle.js" %25OPTIONS%25
+"%25PROG_PATH%25" "$(ProjectDir)Scripts\FileNotInBundle.js" %25OPTIONS%25
 
 ECHO Bundling a CSS bundle ...
-ECHO "%25PROG_PATH%25" "$(ProjectDir)Styles\Styles.css.custombundle" "$(ProjectDir)."
-"%25PROG_PATH%25" "$(ProjectDir)Styles\Styles.css.custombundle" "$(ProjectDir)."
+ECHO "%25PROG_PATH%25" "$(ProjectDir)Styles\Styles.css.custombundle" "$(ProjectDir)." %25OPTIONS%25
+"%25PROG_PATH%25" "$(ProjectDir)Styles\Styles.css.custombundle" "$(ProjectDir)." %25OPTIONS%25
 
 ECHO Minimising a single CSS file ...
-ECHO "%25PROG_PATH%25" "$(ProjectDir)Styles\FileNotInBundle.css"
-"%25PROG_PATH%25" "$(ProjectDir)Styles\FileNotInBundle.css"
+ECHO "%25PROG_PATH%25" "$(ProjectDir)Styles\FileNotInBundle.css" %25OPTIONS%25
+"%25PROG_PATH%25" "$(ProjectDir)Styles\FileNotInBundle.css" %25OPTIONS%25
 </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

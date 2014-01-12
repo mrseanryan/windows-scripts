@@ -192,6 +192,8 @@ namespace CustomBundler
             string fileSep = GetFileSeparatorForBundle(bundle.Type);
             foreach(string path in bundle.FilePaths)
             {
+                Output.WriteLine("Bundling file " + path, Verbosity.Verbose);
+
                 sb.AppendLine(CreateCommentText(GetFileSummary(path)));
                 sb.AppendLine(File.ReadAllText(path));
                 if (!string.IsNullOrEmpty(fileSep))
