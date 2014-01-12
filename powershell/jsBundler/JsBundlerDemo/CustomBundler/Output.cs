@@ -2,6 +2,8 @@
 
 namespace CustomBundler
 {
+    enum Verbosity { Normal, Verbose }
+
     class Output
     {
         internal static void Write(Exception ex)
@@ -16,14 +18,37 @@ namespace CustomBundler
             }
         }
 
-        internal static void WriteLine(string text)
+        internal static void WriteLine(string text, Verbosity verb = Verbosity.Normal)
         {
-            Console.WriteLine(GetAppTitle() + ": " + text);
+            if (IsVerboseEnough(verb))
+            {
+                Console.WriteLine(GetAppTitle() + ": " + text);
+            }
+        }
+
+        private static bool IsVerboseEnough(Verbosity verb)
+        {
+            if (verb == Verbosity.Verbose)
+            {
+                return IsVerbose;
+            }
+            if (verb == Verbosity.Normal)
+            {
+                return true;
+            }
+            throw new ArgumentException("Unhandled verbosity level:" + verb);
         }
 
         private static string GetAppTitle()
         {
             return "CustomBundler";
         }
+
+        internal static void WriteLineNoPrefix(string text)
+        {
+            Console.WriteLine(text);
+        }
+
+        public static bool IsVerbose { get; set; }
     }
 }
