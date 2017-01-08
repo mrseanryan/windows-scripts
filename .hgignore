@@ -6,3 +6,7 @@ syntax: glob
 obj
 Debug
 Release
+
+#temp
+ImageMagick\out
+ImageMagick\temp
