@@ -14,7 +14,7 @@ IF NOT EXIST temp (MKDIR temp)
 DEL %_OUTDIR%\*.png
 
 :: Read all the jpg images from the directory, resize them, add some text and save as a png in a different directory
-for %%f in (%_INPUT_DIR%\*.jpg) do ( ECHO %%f... && magick convert "%%f" -resize 800x600 -auto-orient "%_OUTDIR%\%%~nf.png" )
+for %%f in (%_INPUT_DIR%\*.jpg) do ( ECHO Resizing %%f... && magick convert "%%f" -resize 800x600 -auto-orient "%_OUTDIR%\%%~nf.png" )
 
 REM text does not work on 1st test image :-( - so use watermark image instead...
 
@@ -27,7 +27,7 @@ magick composite -compose CopyOpacity  temp\stamp_mask.png  temp\stamp_fgnd.png 
 REM magick mogrify -trim +repage temp\stamp.png
 
 REM apply the watermark
-for %%f in (%_OUTDIR%\*.png) do ( ECHO %%f... && magick composite -gravity southeast -geometry +10+10 -watermark 30x100 temp\stamp.png "%%f" "%%f" )
+for %%f in (%_OUTDIR%\*.png) do ( ECHO Watermarking %%f... && magick composite -gravity southeast -geometry +10+10 -watermark 30x100 temp\stamp.png "%%f" "%%f" )
 
 DIR %_OUTDIR%
 
