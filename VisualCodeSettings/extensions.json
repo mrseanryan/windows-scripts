@@ -1,0 +1,19 @@
+{
+  "recommendations": [
+    "msjsdiag.debugger-for-chrome",
+    "EditorConfig.EditorConfig",
+    "eg2.tslint",
+    "yukidoi.blade-runner",
+    "rbbit.typescript-hero",
+    "miclo.sort-typescript-imports",
+    "esbenp.prettier-vscode",
+    "eamodio.gitlens",
+    "fknop.vscode-npm",
+    "christian-kohler.npm-intellisense",
+    "xabikos.reactsnippets",
+    "mrmlnc.vscode-scss",
+    "miclo.sort-typescript-imports",
+    "robertohuertasm.vscode-icons",
+    "mrcrowl.hg"
+  ]
+}
