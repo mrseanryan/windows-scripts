@@ -1,7 +1,10 @@
 # git notes
 
-```
-//get latest
+## rebasing
+
+https://git-scm.com/book/en/v2/Git-Branching-Rebasing
+
+//get latest - rebase to 'merge' from remote master, and have a single history line (as opposed to 2 history lines with merge)
 git rebase origin/master
 
 (commit via VC)
@@ -37,20 +40,6 @@ $ git stash pop                  # prepare to work on all other changes
 # ... repeat above five steps until one commit remains ...
 $ edit/build/test remaining parts
 $ git commit foo -m 'Remaining parts'
-
-## CMDs run to update and push a branch:
-
-//this updates from trunk (master)
-git fetch && git rebase origin/master
-
-//this pulls remote changes on this branch
-git pull
-
-//this pulls remote changes on this branch, and handles if someone else did a rebase against master, on this branch
-git pull --rebase
-
-//this pushes - and makes sure no one else made changes since (on this branch)
-git push --force-with-lease
 
 ## git diff
 
@@ -91,9 +80,37 @@ git log --grep wordInCommitMessage
 //limit log to a path
 -- path/to/file
 
-## show branches on remote
+## branches
+
+### show branches on remote
 
 git remote show origin
+
+### getting a remote branch
+
+//create a tracking branch:
+//Tracking branches are local branches that have a direct relationship to a remote branch
+$ git checkout -b {branch-name} origin/{branch-name}
+Branch {branch-name} set up to track remote branch {branch-name} from origin.
+Switched to a new branch '{branch-name}'
+
+//shortcut (if just 1 remote and local branch does not exist)
+git checkout {branch-name}
+
+### CMDs run to update and push a branch:
+
+//this updates from trunk (master)
+git fetch && git rebase origin/master
+
+//this pulls remote changes on this branch
+git pull
+
+//this pulls remote changes on this branch, and handles if someone else did a rebase against master, on this branch
+git pull --rebase
+
+//this pushes - and makes sure no one else made changes since (on this branch)
+git push --force-with-lease
+
 
 ## git URLs
 
@@ -123,12 +140,24 @@ git rebase -i {commit id/hash}
 - push:
   git push --force-with-lease
 
-### if you are in a mess:
+### reset - if you are in a mess:
 
 //this resets the pointer to match remote
+// *hard*: !!!undoes local commits + updates working dir!!!
 git reset --hard origin/{branch name}
 
-# ref:
+https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#_git_reset
+
+
+reset vs checkout:
+- reset moves the branch that HEAD points to
+	- checkout moves HEAD itself
+- reset HARD can lose working directory changes
+	- checkout HARD will keep working directory changes
+	- BUT checkout with path will NOT keep working directory changes
+
+
+# webmodeler readme:
 
 https://gitlab.srv.hq.mendix.net/webmodeler/webmodeler/tree/master
 
