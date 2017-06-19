@@ -9,3 +9,5 @@ git config --global alias.last "log -1 HEAD"
 
 git config --global alias.pul pull --rebase
 git config --global alias.pus push --force-with-lease
+
+git config --global alias.lo "log --oneline --decorate"
