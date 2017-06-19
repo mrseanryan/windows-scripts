@@ -9,6 +9,10 @@ git rebase origin/master
 //makes sure no one else made changes since?
 git push --force-with-lease
 
+## edit global config
+
+git config --global --edit
+
 ## stashing (like TFS shelvesets)
 
 //to shelve local changes
@@ -105,7 +109,21 @@ also push tags to remote:
 
 git push origin --tags
 
-## if you are in a mess:
+## undo...
+
+## removing a commit from history (!)
+
+git rebase -i {commit id/hash}
+
+- text editor opens with list of commits
+- change 'pick' to be 'drop' for that commit
+- save + close editor
+- check the log:
+  git log
+- push:
+  git push --force-with-lease
+
+### if you are in a mess:
 
 //this resets the pointer to match remote
 git reset --hard origin/{branch name}
