@@ -82,6 +82,10 @@ git log --grep wordInCommitMessage
 
 ## branches
 
+### show local branches
+
+git branch
+
 ### show branches on remote
 
 git remote show origin
@@ -111,6 +115,10 @@ git pull --rebase
 //this pushes - and makes sure no one else made changes since (on this branch)
 git push --force-with-lease
 
+### delete a branch
+
+//fails if the branch has not yet been merged
+git branch -d  my-branch
 
 ## git URLs
 
