@@ -101,6 +101,18 @@ Switched to a new branch '{branch-name}'
 //shortcut (if just 1 remote and local branch does not exist)
 git checkout {branch-name}
 
+### switch back to previous branch
+
+git checkout -
+
+### create a branch
+
+git checkout -b mfe/{name-of-branch-ME-nnn}
+
+#### push NEW branch to origin
+
+git push --set-upstream origin mfe/{name-of-branch-ME-nnn}
+
 ### CMDs run to update and push a branch:
 
 //this updates from trunk (master)
