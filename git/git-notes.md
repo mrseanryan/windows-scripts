@@ -29,6 +29,12 @@ git stash list
 git stash show
 git stash clear
 
+### to pop a particular stash
+
+git stash list
+
+git stash pop stash@{nnn}
+
 ### using git stash to perform multiple commits
 
 # ... hack hack hack ...
@@ -117,15 +123,16 @@ git push --set-upstream origin mfe/{name-of-branch-ME-nnn}
 
 //this updates from trunk (master)
 git fetch && git rebase origin/master
+- note: a pull will undo the rebase, unless you first push
+
+//this pushes - and makes sure no one else made changes since (on this branch)
+git push --force-with-lease
 
 //this pulls remote changes on this branch
 git pull
 
 //this pulls remote changes on this branch, and handles if someone else did a rebase against master, on this branch
 git pull --rebase
-
-//this pushes - and makes sure no one else made changes since (on this branch)
-git push --force-with-lease
 
 ### delete a branch
 
