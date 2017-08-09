@@ -183,6 +183,25 @@ reset vs checkout:
 	- checkout HARD will keep working directory changes
 	- BUT checkout with path will NOT keep working directory changes
 
+### deleting branches
+
+#### deleting branches - LOCAL
+
+```
+git branch -d <branch_name>
+```
+
+If there are unmerged changes which you are confident of deleting:
+
+```
+git branch -D <branch_name>
+```
+
+#### deleting branches - REMOTE
+
+```
+git push origin --delete <branch_name>
+```
 
 # webmodeler readme:
 
