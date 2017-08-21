@@ -167,6 +167,13 @@ git rebase -i {commit id/hash}
 - push:
   git push --force-with-lease
 
+## recover a commit that was removed from history
+
+git reflog
+git cherry-pick {commit-hash}
+
+git push
+  
 ### reset - if you are in a mess:
 
 //this resets the pointer to match remote
