@@ -1,0 +1,58 @@
+#!/bin/sh
+#
+# to use this file, rename it to be 'pre-commit' and place it in the folder '.git/hooks'
+pass=true
+
+addrm() {
+    rm=$rm"$1\n"
+}
+
+addrmheader() {
+    rm="$rm\n"          # New line
+    rm="$rm\e[0;31m"    # Red
+    rm="$rm$1"          # Header
+    rm="$rm\e[0m"       # Clear styling
+    rm="$rm\n"          # New line
+}
+
+# Check itest src files for debug code. 
+itestSrcDir="itest/src/"
+result=$(grep -rnw -e "browser.debug" -e "it.only"  -e "describe.only" -e 'console.log(">' $itestSrcDir)
+if [[ $result ]]; then
+    addrmheader "Debug code detected in 'itest' source files"
+    addrm "$result"
+    pass=false
+fi;
+
+# Check tsx src files for incorrect mobx import
+tsSrcDir="webModeler/client/"
+result=$(grep -rnw -e "debugger" -e "mobx/lib/mobx" -e 'console.log(">' $tsSrcDir)
+if [[ $result ]]; then
+    addrmheader "Debug code detected in 'client' source files"
+    addrm "$result"
+    pass=false
+fi;
+
+# Check for tslint warnings
+stagedfiles=$(git diff --cached --name-only --diff-filter=ACM | grep ".tsx\{0,1\}$")
+if [[ ! "$stagedfiles" = "" ]]; then
+    addheader=true
+    for file in $stagedfiles
+    do
+        tslintresult=$(itest/node_modules/.bin/tslint "$file")
+
+    if [[ $tslintresult ]]; then
+        if [[ $addheader == true ]]; then 
+            addrmheader "TSLint failed"
+            addheader=false
+        fi
+        addrm "$tslintresult"
+        pass=false
+    fi
+    done
+fi
+
+if [[ $pass == false ]]; then
+    echo -e "$rm"
+    exit 1
+fi
