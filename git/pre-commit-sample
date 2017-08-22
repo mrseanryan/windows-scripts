@@ -1,6 +1,8 @@
 #!/bin/sh
 #
 # to use this file, rename it to be 'pre-commit' and place it in the folder '.git/hooks'
+#
+# works on Windows with a unix shell like cmder console emulator
 pass=true
 
 addrm() {
@@ -24,9 +26,10 @@ if [[ $result ]]; then
     pass=false
 fi;
 
-# Check tsx src files for incorrect mobx import
+# Check ts, tsx src files for errors like an incorrect mobx import
 tsSrcDir="webModeler/client/"
-result=$(grep -rnw -e "debugger" -e "mobx/lib/mobx" -e 'console.log(">' $tsSrcDir)
+stagedfiles=$(git diff --cached --name-only --diff-filter=ACM)
+result=$(grep -rnw -e "debugger" -e "mobx/lib/mobx" -e 'console.log' $stagedfiles --include="*.tsx" --include="*.ts")
 if [[ $result ]]; then
     addrmheader "Debug code detected in 'client' source files"
     addrm "$result"
