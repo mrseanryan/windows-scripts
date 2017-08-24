@@ -137,7 +137,13 @@ git pull --rebase
 ### delete a branch
 
 //fails if the branch has not yet been merged
-git branch -d  my-branch
+git branch -d my-branch
+
+//deletes local, even if the branch has not yet been merged
+git branch -D my-branch
+
+//delete a REMOTE branch (not just the tracking branch)
+git push origin --delete my-branch
 
 ## git URLs
 
