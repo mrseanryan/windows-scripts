@@ -128,6 +128,9 @@ git fetch && git rebase origin/master
 //this pushes - and makes sure no one else made changes since (on this branch)
 git push --force-with-lease
 
+//update from a different branch (other than master)
+git fetch && git rebase origin/mfe/branch-name
+
 //this pulls remote changes on this branch
 git pull
 
@@ -182,12 +185,17 @@ git push
   
 ### reset - if you are in a mess:
 
+// problem: rebasing results in merge conflicts in other's commits
+// solution:
+rebase -i xxx // then can delete the extra commits
+
 //this resets the pointer to match remote
 // *hard*: !!!undoes local commits + updates working dir!!!
 git reset --hard origin/{branch name}
 
 https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#_git_reset
 
+https://git-scm.com/docs/git-rebase
 
 reset vs checkout:
 - reset moves the branch that HEAD points to
@@ -225,4 +233,14 @@ https://git-scm.com/book/en/v2/Git-Tools-Stashing-and-Cleaning
 
 https://git-scm.com/docs/git-stash
 
+# splitting a commit
+
+git rebase -i xxx
+
+git reset HEAD~
+
+// now commit your changes as normal
+
+// when finished:
+get rebase --continue
 
