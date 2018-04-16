@@ -189,6 +189,9 @@ git push
 // solution:
 rebase -i xxx // then can delete the extra commits
 
+// also works against other branch, where old commits are hanging around in this branch:
+rebase -i myBranchName // then can delete the extra commits
+
 //this resets the pointer to match remote
 // *hard*: !!!undoes local commits + updates working dir!!!
 git reset --hard origin/{branch name}
