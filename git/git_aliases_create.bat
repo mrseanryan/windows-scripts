@@ -26,5 +26,8 @@ git config --global alias.pus "push --force-with-lease"
 git config --global --unset alias.lo
 git config --global alias.lo "log --oneline --decorate --graph --all"
 
+git config --global --unset alias.logs
+git config --global alias.logs "log --decorate=short --format=oneline --abbrev-commit"
+
 git config --global --unset alias.la
 git config --global alias.la "config --get-regexp alias"
