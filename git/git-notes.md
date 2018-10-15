@@ -182,7 +182,15 @@ git reflog
 git cherry-pick {commit-hash}
 
 git push
-  
+
+## staging/unstaging chunks (like in sourcetree)
+
+// add chunks like sourcetree
+git add -p
+
+// remove chunks like sourcetree
+git co -p
+
 ### reset - if you are in a mess:
 
 // problem: rebasing results in merge conflicts in other's commits
