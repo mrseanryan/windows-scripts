@@ -255,3 +255,20 @@ git reset HEAD~
 // when finished:
 get rebase --continue
 
+### tracking down a bug (binary search)
+
+ref: https://git-scm.com/docs/git-bisect
+
+git bisect start
+git bisect bad
+git co HEAD~10
+git bisect good
+// test for the bug, repeat until good again:
+git bisect <good|bad>
+
+	Keep repeating the process: compile the tree, test it, and depending on whether it is good or bad run git bisect good or git bisect bad to ask for the next commit that needs testing.
+
+	Eventually there will be no more revisions left to inspect, and the command will print out a description of the first bad commit. The reference refs/bisect/bad will be left pointing at that commit.
+
+// end - clean up:
+git bisect reset
