@@ -272,3 +272,15 @@ git bisect <good|bad>
 
 // end - clean up:
 git bisect reset
+
+### making a script executable on Linux
+
+git update-index --chmod=+x build.sh
+
+### viewing diffs
+
+git diff
+
+#### viewing *staged* diffs
+
+git diff --cached
