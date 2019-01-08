@@ -248,6 +248,8 @@ https://git-scm.com/docs/git-stash
 
 git rebase -i xxx
 
+Mark the commit you want to split with the action "edit" (e).
+
 git reset HEAD~
 
 // now commit your changes as normal
