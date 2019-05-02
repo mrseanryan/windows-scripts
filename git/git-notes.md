@@ -162,6 +162,12 @@ also push tags to remote:
 
 git push origin --tags
 
+## clearing files not in git
+
+  Windows: *admin* console
+
+  git clean -dfx
+
 ## undo...
 
 ## removing a commit from history (!)
