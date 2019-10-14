@@ -86,6 +86,12 @@ git log --grep wordInCommitMessage
 //limit log to a path
 -- path/to/file
 
+// Log as one line
+git log --graph --oneline
+
+// Log as lines but sorted by date (like gitlab 'Commits' tab does)
+git log --date-order --graph --oneline
+
 ## branches
 
 ### show local branches
