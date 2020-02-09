@@ -1,0 +1,19 @@
+<NotepadPlus>
+    <Session activeView="0">
+        <mainView activeIndex="11">
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1680" startPos="384" endPos="403" selMode="0" lang="Normal Text" encoding="-1" filename="C:\hg_root\hg_OdinCommon\deploysql\scripts\sqlDump\databaseList.csv" />
+            <File firstVisibleLine="12" xOffset="0" scrollWidth="1680" startPos="1186" endPos="1157" selMode="0" lang="Python" encoding="-1" filename="C:\hg_root\hg_OdinCommon\deploysql\scripts\sqlDump\dumpSqlObjectsToDisk.py" />
+            <File firstVisibleLine="119" xOffset="0" scrollWidth="1680" startPos="4233" endPos="4239" selMode="0" lang="Python" encoding="-1" filename="C:\hg_root\hg_OdinCommon\deploysql\scripts\deploySQL_common.py" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1680" startPos="164" endPos="164" selMode="0" lang="Python" encoding="-1" filename="C:\hg_root\hg_OdinCommon\deploysql\scripts\database_common.py" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1680" startPos="723" endPos="713" selMode="0" lang="Batch" encoding="-1" filename="C:\hg_root\hg_OdinCommon\deploysql\scripts\sqlDump\run_dumpSql_eLicensing_DOWN_FromWeb.bat" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1680" startPos="460" endPos="460" selMode="0" lang="Batch" encoding="-1" filename="C:\hg_root\hg_OdinCommon\deploysql\scripts\sqlDump\run_dumpSql_eLicensing_UP_ToWeb.bat" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1680" startPos="635" endPos="635" selMode="0" lang="Batch" encoding="-1" filename="C:\hg_root\hg_OdinCommon\deploysql\scripts\sqlDump\run_dumpSql_to_LING_Licensing.bat" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1680" startPos="454" endPos="454" selMode="0" lang="Batch" encoding="-1" filename="C:\hg_root\hg_OdinCommon\deploysql\scripts\sqlDump\run_dumpSql_to_Temp.bat" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1680" startPos="664" endPos="664" selMode="0" lang="Batch" encoding="-1" filename="C:\hg_root\hg_OdinCommon\deploysql\scripts\sqlDump\run_dumpSql_all_databases.bat" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1680" startPos="504" endPos="504" selMode="0" lang="Batch" encoding="-1" filename="C:\hg_root\hg_OdinCommon\deploysql\scripts\sqlDump\run_dumpSql_eLicensing.bat" />
+            <File firstVisibleLine="163" xOffset="0" scrollWidth="1680" startPos="7813" endPos="7813" selMode="0" lang="Normal Text" encoding="-1" filename="C:\hg_root\hg_LING_main\LINGandLicensing\LING\dev\Source\FWALA_Application.bas" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1680" startPos="269" endPos="269" selMode="0" lang="Python" encoding="-1" filename="C:\hg_root\hg_OdinCommon\deploysql\scripts\CopySQLtoDeploy.py" />
+        </mainView>
+        <subView activeIndex="0" />
+    </Session>
+</NotepadPlus>
