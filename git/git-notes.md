@@ -23,7 +23,6 @@ git stash
 
 //to continue work
 git stash pop
-```
 
 git stash list
 git stash show
@@ -193,7 +192,13 @@ git rebase -i {commit id/hash}
 git reflog
 git cherry-pick {commit-hash}
 
-git push
+## cherry-pick a commit from another fork
+
+git remote add <other-fork-alias> <other-fork-git repo URL>
+git checkout <branch>
+git fetch <other-fork-alias>
+git cherry-pick <commit-hash>
+git push <your-fork-alias>
 
 ## staging/unstaging chunks (like in sourcetree)
 
