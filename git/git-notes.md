@@ -213,8 +213,8 @@ git cherry-pick {commit-hash}
 ## cherry-pick a commit from another fork
 ```
 git remote add <other-fork-alias> <other-fork-git repo URL>
-git checkout <branch>
 git fetch <other-fork-alias>
+git checkout <branch>
 git cherry-pick <commit-hash>
 git push <your-fork-alias>
 ```
