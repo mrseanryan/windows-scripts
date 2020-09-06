@@ -19,6 +19,7 @@ git push --force-with-lease
 git config --global --edit
 
 ## stashing (like TFS shelvesets)
+
 ```
 //to shelve local changes
 git stash
@@ -42,6 +43,7 @@ git stash pop stash@{nnn}
 ### using git stash to perform multiple commits
 
 #### ... hack hack hack ...
+
 ```
 $ git add --patch foo            # add just first part to the index
 $ git stash save --keep-index    # save all other changes to the stash
@@ -49,6 +51,7 @@ $ edit/build/test first part
 $ git commit -m 'First part'     # commit fully tested change
 $ git stash pop                  # prepare to work on all other changes
 ```
+
 #### ... repeat above five steps until one commit remains ...
 
 ```
@@ -57,6 +60,7 @@ $ git commit foo -m 'Remaining parts'
 ```
 
 ## git diff
+
 ```
 //only shows *unstaged* changes!
 git diff
@@ -64,7 +68,9 @@ git diff
 //only shows *staged* changes (what would be committed...)
 git diff --staged
 ```
+
 ## git remove
+
 ```
 //remove from git, AND from disk
 git rm README.txt
@@ -72,6 +78,7 @@ git rm README.txt
 //remove from git, but NOT remove from disk
 git rm --cached README.txt
 ```
+
 ## git log
 
 ```
@@ -187,9 +194,9 @@ git push origin --tags
 
 ## clearing files not in git
 
-  Windows: *admin* console
+Windows: _admin_ console
 
-  git clean -dfx
+git clean -dfx
 
 ## undo...
 
@@ -206,11 +213,14 @@ git rebase -i {commit id/hash}
   git push --force-with-lease
 
 ## recover a commit that was removed from history
+
 ```
 git reflog
 git cherry-pick {commit-hash}
 ```
+
 ## cherry-pick a commit from another fork
+
 ```
 git remote add <other-fork-alias> <other-fork-git repo URL>
 git fetch <other-fork-alias>
@@ -218,6 +228,7 @@ git checkout <branch>
 git cherry-pick <commit-hash>
 git push <your-fork-alias>
 ```
+
 ## staging/unstaging chunks (like in sourcetree)
 
 ```
@@ -246,11 +257,12 @@ https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#_git_reset
 https://git-scm.com/docs/git-rebase
 
 reset vs checkout:
+
 - reset moves the branch that HEAD points to
-	- checkout moves HEAD itself
+  - checkout moves HEAD itself
 - reset HARD can lose working directory changes
-	- checkout HARD will keep working directory changes
-	- BUT checkout with path will NOT keep working directory changes
+  - checkout HARD will keep working directory changes
+  - BUT checkout with path will NOT keep working directory changes
 
 ### deleting branches
 
@@ -307,9 +319,9 @@ git bisect good
 git bisect <good|bad>
 ```
 
-	Keep repeating the process: compile the tree, test it, and depending on whether it is good or bad run git bisect good or git bisect bad to ask for the next commit that needs testing.
+    Keep repeating the process: compile the tree, test it, and depending on whether it is good or bad run git bisect good or git bisect bad to ask for the next commit that needs testing.
 
-	Eventually there will be no more revisions left to inspect, and the command will print out a description of the first bad commit. The reference refs/bisect/bad will be left pointing at that commit.
+    Eventually there will be no more revisions left to inspect, and the command will print out a description of the first bad commit. The reference refs/bisect/bad will be left pointing at that commit.
 
 // end - clean up:
 git bisect reset
@@ -322,11 +334,12 @@ git update-index --chmod=+x build.sh
 
 git diff
 
-#### viewing *staged* diffs
+#### viewing _staged_ diffs
 
 git diff --cached
 
 # switching the origin of a repo (for example after cloning, instead of forking)
+
 ```
 git remote rm origin
 git remote add origin git@github.com:aplikacjainfo/proj1.git
