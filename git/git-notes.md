@@ -114,11 +114,15 @@ git log --date-order --graph --oneline
 
 ### show local branches
 
+```
 git branch
+```
 
 ### show branches on remote
 
+```
 git remote show origin
+```
 
 ### getting a remote branch
 
@@ -135,15 +139,21 @@ git checkout {branch-name}
 
 ### switch back to previous branch
 
+```
 git checkout -
+```
 
 ### create a branch
 
+```
 git checkout -b mfe/{name-of-branch-ME-nnn}
+```
 
 #### push NEW branch to origin
 
+```
 git push --set-upstream origin mfe/{name-of-branch-ME-nnn}
+```
 
 ### CMDs run to update and push a branch:
 
@@ -180,17 +190,21 @@ git push origin --delete my-branch
 
 ## git URLs
 
+```
 git remote -v
+```
 
 ## tags
 
+```
 git tag
 
 git tag -a v1.2 -m "my tag details" 9fceb02
 
-also push tags to remote:
+//also push tags to remote:
 
 git push origin --tags
+```
 
 ## clearing files not in git
 
@@ -202,7 +216,9 @@ git clean -dfx
 
 ## removing a commit from history (!)
 
+```
 git rebase -i {commit id/hash}
+```
 
 - text editor opens with list of commits
 - change 'pick' to be 'drop' for that commit
@@ -329,20 +345,28 @@ git bisect <good|bad>
 
     Eventually there will be no more revisions left to inspect, and the command will print out a description of the first bad commit. The reference refs/bisect/bad will be left pointing at that commit.
 
+```
 // end - clean up:
 git bisect reset
+```
 
 ### making a script executable on Linux
 
+```
 git update-index --chmod=+x build.sh
+```
 
 ### viewing diffs
 
+```
 git diff
+```
 
 #### viewing _staged_ diffs
 
+```
 git diff --cached
+```
 
 # switching the origin of a repo (for example after cloning, instead of forking)
 
