@@ -212,6 +212,12 @@ git rebase -i {commit id/hash}
 - push:
   git push --force-with-lease
 
+## rebasing from the very first commit (the root)
+
+```
+git rebase -i --root origin/master
+```
+
 ## recover a commit that was removed from history
 
 ```
