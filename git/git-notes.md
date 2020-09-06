@@ -368,7 +368,9 @@ git diff
 git diff --cached
 ```
 
-# switching the origin of a repo (for example after cloning, instead of forking)
+# Changing REMOTE origin
+
+## switching the origin of a repo (for example after cloning, instead of forking)
 
 ```
 git remote rm origin
@@ -376,3 +378,19 @@ git remote add origin git@github.com:aplikacjainfo/proj1.git
 git config master.remote origin
 git config master.merge refs/heads/master
 ```
+
+## Add local git repo to github
+
+1. create the repo in github
+
+2. run commands:
+
+```
+git remote add origin git@github.com:{user}/{repo-name}.git
+
+git remove -v
+
+git push
+```
+
+note: if you already have some commits in the github repo, you need to do something else ...
