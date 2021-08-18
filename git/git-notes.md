@@ -388,7 +388,7 @@ git config master.merge refs/heads/master
 ```
 git remote add origin git@github.com:{user}/{repo-name}.git
 
-git remove -v
+git remote -v
 
 git push
 ```
