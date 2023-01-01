@@ -1,10 +1,8 @@
 SETLOCAL
 
-PUSHD "c:\sean\bb\windows-programming-tools"
-
 SET _OUTPATH=%TEMP%\handle_out.txt
 
-handle > %_OUTPATH%
+handle.exe > %_OUTPATH%
 
 start notepad %_OUTPATH%
 
